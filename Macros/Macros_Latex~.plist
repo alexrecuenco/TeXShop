@@ -3983,14 +3983,7 @@ end tell
 		</dict>
 		<dict>
 			<key>content</key>
-			<string>
-	\question 
-	\begin{choices}
-		\choice
-		\choice
-		\choice
-		\CorrectChoice
-	\end{choices}
+			<string>\question #SEL##INS##RET#\begin{choices}#RET#	\choice#RET#\choice#RET#\choice#RET#\choice\CorrectChoice#RET#\end{choices}
 </string>
 			<key>key</key>
 			<string>4</string>

@@ -297,7 +297,7 @@
 \includegraphics{#INS#•#INS#}#RET#
 \include{#INS#•#INS#}#RET#
 \item[#INS#•#INS#]#RET#•
-\item#RET##INS#•#INS#
+\item #INS#•#INS##RET#•
 \hspace*{#INS#•#INS#}
 \hspace{#INS#•#INS#}
 \href{#INS#•‹URL›#INS#}{•‹words in doc›}
@@ -679,6 +679,8 @@ btitpg:=\begin{titlepage}#RET##INS#•#INS##RET#\end{titlepage}•
 btheo:=\begin{theorem}#RET##INS#•#INS##RET#\end{theorem}•
 bindex:=\begin{theindex}#RET##INS#•#INS##RET#\end{theindex}•
 bbib:=\begin{thebibliography}{#INS#•#INS#}#RET#\bibitem{•}#RET#•#RET#\end{thebibliography}•
+btikzo:=\begin{tikzpicture}[#INS#•#INS#]#RET##INS#•#INS##RET#\end{tikzpicture}•
+btikz:=\begin{tikzpicture}#RET##INS#•#INS##RET#\end{tikzpicture}•
 btabb:=\begin{tabbing}#RET##INS#•#INS##RET#\end{tabbing}•
 btblso:=\begin{table*}[#INS#•#INS#]#RET#•#RET#\end{table*}•
 btbls:=\begin{table*}#RET##INS#•#INS##RET#\end{table*}•

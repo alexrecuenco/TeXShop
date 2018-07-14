@@ -1,0 +1,545 @@
+ %!TEX TS-program = xelatex
+ %!TEX encoding = UTF-8 Unicode
+ % Creeated by Alejandro Gonzalez Recuenco, 2017
+\documentclass[12pt, draft]{exam}
+% loads all necessary packages (feel free to customize for your needs)
+\usepackage[a4paper, margin = 2cm, headsep = .5cm, headheight=50pt]{geometry}
+%Add showframe for debugging and seeing the frame
+\usepackage[main = english, thai]{babel}
+\usepackage{amssymb,amsmath,amsthm,amsfonts} 
+\usepackage{graphicx}
+
+\usepackage{sectsty} %To change section font
+\usepackage{hanging}
+
+\usepackage{calc}
+\usepackage{tabto}
+\usepackage{xpatch}
+
+\usepackage{xstring} %Detect if something is integer\IfInteger
+
+\usepackage{tasks}
+
+\usepackage{physics}%better math style
+\usepackage{esvect} %\vv command much better than vec
+
+\usepackage{pgf,tikz}
+\usepackage{pgfplots}
+\usepackage{mathrsfs}
+\usepackage{txfonts,pxfonts}
+
+\usepackage{venndiagram} %Easy but simple ven diagrams
+
+\usetikzlibrary{arrows, arrows.meta, positioning, calc}
+\usetikzlibrary{angles} %Creating angles
+\usepgfplotslibrary{fillbetween} %Filling graphs
+
+
+%pgfonlayer commands
+\pgfdeclarelayer{background layer}
+\pgfdeclarelayer{foreground layer}
+\pgfsetlayers{background layer,main,foreground layer}
+\pgfplotsset{compat=1.14} %package warning
+%calc for coordinate calculation
+
+%Thai fonts, XeLaTeX, as recommended on Thai font website.
+%Thai fonts, XeLaTeX, as recommended on Thai font website.
+%================================Font testing ========
+%
+%	abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ
+%
+%	aAbBcCdDeEfFgGhHiIjJkKlLmMnNñÑoOpPqQrRsStTuUvVwWxXyYzZ
+%
+%================================Font testing ========
+
+%% XeLaTeX Part to set thai fonts
+\usepackage[no-math]{fontspec} 
+\usepackage{xunicode} 
+\usepackage{xltxtra} 
+%\usepackage{mathspec}
+
+
+\def\scale{1.4}
+
+\XeTeXlinebreaklocale "th"
+\XeTeXlinebreakskip = 0pt plus 1pt   %
+
+
+\setmainfont[Scale=\scale, BoldFont={TH SarabunPSK Bold},  
+ ItalicFont={TH SarabunPSK Italic}, 
+ BoldItalicFont={TH SarabunPSK Bold Italic} 
+ ]{TH SarabunPSK}  
+ \setsansfont[Scale=\scale, BoldFont={TH SarabunPSK Bold},  
+ ItalicFont={TH SarabunPSK Italic}, 
+ BoldItalicFont={TH SarabunPSK Bold Italic} 
+ ]{TH SarabunPSK}  
+ \setmonofont[Scale=\scale, BoldFont={TH SarabunPSK Bold},  
+ ItalicFont={TH SarabunPSK Italic}, 
+ BoldItalicFont={TH SarabunPSK Bold Italic} 
+ ]{TH SarabunPSK}  
+%\setmathsfont(Digits){TH Sarabun New}
+
+
+\newfontfamily\curlyfont{Monsieur La Doulaise Regular} %For good luck message
+
+%\newfontfamily\DejaSans{DejaVu Sans}
+
+%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%
+%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%
+%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%
+%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%
+%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%
+%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%
+
+\newcommand{\myversion}{5} % this line is very (DONT DELETE IT)
+
+\newcommand{\studentclass}{M 632}
+\newcommand{\studentid}{42}
+\newcommand{\studentID}{31415}
+\newcommand{\studentName}{Alex}
+\newcommand{\studentSurname}{Surname}
+\newcommand{\studentnickname}{El español}
+
+\newcommand{\randnum}{3} %random number between 1-6
+\newcommand{\randnumten}{7} %random number between 1-10
+\newcommand{\randnumhundred}{86} %random number between 1-100
+\newcommand{\seed}{9875}%To be used as random seed on this file, random number between 1-10000 that doesn't repeat between exams
+
+\def\studentname{\studentName\ \studentSurname}
+%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%
+%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%
+%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%%=+=%
+
+%\let\oldpar\par
+
+\newcounter{questionnumber}
+\setcounter{questionnumber}{0}
+
+
+\renewenvironment{questions}{%
+\renewcommand{\labelitemi}{\arabic{item}}%
+  \enumerate%
+  \newcommand\question{%
+     \refstepcounter{questionnumber}\stepcounter{numquestions}\item[\thequestionnumber]%
+  }%
+}{%
+  \endenumerate%
+}
+
+
+
+\def\CorrectChoice{\relax} %Just a tag, when exam is created it should generate nothing
+\RenewTasks[label-format = \bfseries,
+			counter-format = {tsk[1].},
+			item-indent = 3em,
+			label-offset = 1em,
+			label-align = left,
+			after-item-skip = 3pt plus 2em]{choices}[\choice](2)
+
+\makeatletter
+\newcommand\noheadingbreakpar{\par\nobreak\@afterheading}
+\makeatother
+
+\newlength{\beforechoicessep}
+\setlength{\beforechoicessep}{4mm}
+
+\BeforeBeginEnvironment{choices}{\noheadingbreakpar\minipage{\linewidth}\vspace{\beforechoicessep}}
+\AfterEndEnvironment{choices}{\endminipage\par}
+
+
+\renewcommand\thesection{Chapter \Roman{section}.}
+\renewcommand{\thequestionnumber}{\arabic{questionnumber}.}
+\renewcommand{\thechoice}{\ReadCounterPattern[tasks]{tsk}} %\thechoice holds the number of the choice number in the choice environment when using it as a tasks environment
+
+
+
+%% Answer sheet at the start 
+ %Answer sheet standard
+ \newcommand{\answersheetrow}[1][10]{%
+	\begin{tikzpicture}[font=\small, x = 1cm, y = 1cm,
+						every node/.style={font=\footnotesize, inner sep = 0.2cm}, baseline = 0]%
+		\pgfmathsetmacro{\bubblehsep}{0.2cm}%
+		\pgfmathsetmacro{\ylineskip}{1cm}%
+		\pgfmathsetlengthmacro{\bubbler}{0.2cm}% measured from center
+		\foreach \line in {1,...,#1} {%
+			\stepcounter{qnum}%
+        	\begin{scope}[yshift = -\line * \ylineskip]%
+				\node at (0,0) {\textbf{\theqnum}};%
+				\foreach \count/\thecount/\thaicount in {1/a/๑, 2/b/๒, 3/c/๓, 4/d/๔} { %
+					\draw ({\count * (2 * \bubbler + \bubblehsep)-\bubbler }, -\bubbler) rectangle ++(2*\bubbler, 2*\bubbler) node[pos = 0.5, label =\thecount] {} node[pos = 0.5, text height = \bubbler, text depth = 0.1ex]{\thaicount};
+
+				}% close foreach
+			\end{scope}%
+		}% close foreach
+	\end{tikzpicture}%
+}
+\newcommand{\fullanswersheet}[2][10]{%
+	\IfInteger{#2}{%Make sure it is a number 
+		\IfInteger{#1}{%
+			\pgfmathtruncatemacro{\nrows}{#2/#1}%
+			\ifnum\nrows>0\relax%
+				\foreach \tenquestion in {1,...,\nrows}{%
+					\answersheetrow[#1]~%
+					%~\answersheetrow[5]~\answersheetrow~\answersheetrow~\answersheetrow
+		      		}%
+			\fi%
+			\pgfmathtruncatemacro{\nlast}{#2-\nrows*#1}%
+			\ifnum\nlast>0\relax%
+				\answersheetrow[\nlast]%
+			\fi%
+		}{%
+			\message{Optional argument isn't an integer}{\Large ?}
+		}% #1 if close
+	}{%
+		\message{Not an integer}{\Large ?}%
+	}% #2 if close
+}
+
+
+\NewDocumentEnvironment{sketchgraph}{m m m m O{1} O{} O{x} O{y} }{%
+	\begin{tikzpicture}[domain=#1:#2, 
+	dot/.style={circle,inner sep=1pt,fill,label={$##1$},name=##1},
+ 	extended line/.style={shorten >=-##1,shorten <=-##1},
+ 	extended line/.default=1cm,
+	#6
+	]%
+%	This environment is a tikzenvironment that surrounds a plot with a grid drawn already
+%	The y axis is labeled $y$ and the x axis is labeled $x$
+%	Inside the environment one can use the command \minx \miny \maxx \maxy to reference the min and max coordinates of the canvas, since theya re stored as those variables.
+%	Everything is included in an scope environment, therefore even if a clip is used, that will only affect the plotted graph inside the scope, which amkes sure the grid outside is maintained
+%	Args: 
+%		#1 x min
+%		#2 x max
+%		#3 y min
+%		#4 y max
+%		#5 O{1}grid step, should be given as (x step, y step) of the grid
+%		#6 O{} additional parameters to be included on the tikzpicture environment
+%	TODO: Extra aditional parameters to control the style/colors
+%	TODO2: environments to be passed to the scope independantly??
+    	\pgfmathsetmacro{\minx}{#1}
+    	\pgfmathsetmacro{\maxx}{#2}
+    	\pgfmathsetmacro{\miny}{#3}
+    	\pgfmathsetmacro{\maxy}{#4}
+        \draw[very thin, color = gray, dashed, step = {#5}] 
+        (\minx, \miny) grid (\maxx, \maxy);
+        \draw[->] (\minx, 0) -- (\maxx, 0) node[right] {$#7$};
+        \draw[->] (0, \miny) -- (0, \maxy) node[above] {$#8$};
+        \begin{scope}
+  }{%
+  		\end{scope}
+  	\end{tikzpicture}%
+  }
+
+\NewDocumentEnvironment{sketchvector}{m m m m O{1} O{} O{x} O{y} }{%
+	\begin{tikzpicture}[domain=#1:#2, 
+	dot/.style={circle,inner sep=1pt,fill,label={$##1$},name=##1},
+ 	extended line/.style={shorten >=-##1,shorten <=-##1},
+ 	extended line/.default=1cm,
+	#6
+	]%
+%	This environment is a tikzenvironment that surrounds a plot with a grid drawn already
+%	The y axis is labeled $y$ and the x axis is labeled $x$
+%	Inside the environment one can use the command \minx \miny \maxx \maxy to reference the min and max coordinates of the canvas, since theya re stored as those variables.
+%	Everything is included in an scope environment, therefore even if a clip is used, that will only affect the plotted graph inside the scope, which amkes sure the grid outside is maintained
+%	Args: 
+%		#1 x min
+%		#2 x max
+%		#3 y min
+%		#4 y max
+%		#5 O{1}grid step, should be given as (x step, y step) of the grid
+%		#6 O{} additional parameters to be included on the tikzpicture environment
+%	TODO: Extra aditional parameters to control the style/colors
+%	TODO2: environments to be passed to the scope independantly??
+    	\pgfmathsetmacro{\minx}{#1}
+    	\pgfmathsetmacro{\maxx}{#2}
+    	\pgfmathsetmacro{\miny}{#3}
+    	\pgfmathsetmacro{\maxy}{#4}
+%        \draw[very thin, color = gray, dashed, step = {#5}] 
+%         (\minx, \miny) grid (\maxx, \maxy);
+        \draw[->] (\minx, 0) -- (\maxx, 0) node[right] {$#7$};
+        \draw[->] (0, \miny) -- (0, \maxy) node[above] {$#8$};
+        \begin{scope}
+}{%
+  		\end{scope}
+  	\end{tikzpicture}%
+}
+\NewDocumentEnvironment{sketchpolar}{O{4} O{}}{%
+    \begin{tikzpicture}[>=latex, #2]
+      	\pgfmathsetmacro{\maxr}{#1}      
+      	\pgfmathtruncatemacro{\maxrint}{#1}      
+        % Draw the lines at multiples of pi/12
+        \foreach \ang in {0,...,31} {
+          \draw [lightgray] (0,0) -- (\ang * 180 / 16: 1.1 * \maxrint);
+        }
+        % Concentric circles and radius labels
+        \foreach \s in {1, 2, 3} {
+          \draw [lightgray] (0,0) circle ({\maxrint/4 *(\s - 0.5)});
+          \pgfmathsetmacro{\circleradii}{\maxrint/4 * \s}
+          \draw (0,0) circle (\circleradii);
+          \begin{pgfonlayer}{foreground layer}
+          	\node [fill=white, circle, inner sep = 0pt] at (\circleradii, -0.2)  {\tiny $\circleradii$};
+          \end{pgfonlayer}
+        }        % Add the labels at multiples of pi/4
+        \foreach \ang/\lab/\dir in {
+          0/0/right,
+          1/{\pi/4}/{above right},
+          2/{\pi/2}/above,
+          3/{3\pi/4}/{above left},
+          4/{\pi}/left,
+          5/{5\pi/4}/{below left},
+          7/{7\pi/4}/{below right},
+          6/{3\pi/2}/below} {
+          \draw (0,0) -- (\ang * 180 / 4 : 1.12 * \maxrint)
+          node [fill=white, inner sep = 0 ] at +(\ang * 180 / 4: 0.1) [\dir] {\scriptsize $\lab$};
+        }
+
+        
+
+        % The double-lined circle around the whole diagram
+        \draw [style=double] (0,0) circle (\maxrint);   
+%        \fill [fill=red!50!black, opacity=0.5] plot [domain=-pi/2:pi/2] (xy polar cs:angle=\x r,radius= {2-2*sin(\x r)});
+%        \draw [thick,color=red,domain=0:2*pi,samples=200,smooth] plot (xy polar cs:angle=\x r,radius= {2-2*sin(\x r)});
+%        \node [fill=white] at (2,1) {$r=2-2\sin\theta$};
+}{
+	\end{tikzpicture}%
+ }
+ 
+ 
+ 
+\tikzset{%
+	vector/.style =	{arrows= -{Stealth[length = 3mm]},%
+					every node/.style = {pos = 0.5,% 
+										sloped,%
+										above%
+										}
+					}
+}
+ %<Labels>% %<Labels>% %<Labels>%
+ 
+
+
+\widowpenalties 1 10000
+\flushbottom
+ 
+%\sectionfont{\fontsize{11}{10}\selectfont} 
+
+% \sectionfont{\normalsize} 
+
+ %</Labels>% %</Labels>% %</Labels>%
+
+%<Math definitions>%
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\setname}[1]{\mathbb{#1}}
+
+\def\mathe{\mathrm{e}}
+\def\mathi{\mathrm{i}}
+
+
+\newcommand{\unit}[2][~]{#1\mathrm{#2}} %ISO standard SI units should be roman.
+% The optional argument is there in case other type of separation is needed, otherwise it uses an unbreakable superation is there in case you need to set up -- ENABLED AGAIN 
+
+
+\DeclareMathOperator{\cis}{cis}
+
+
+\newcount\colveccount
+\newcommand*\colvec[1]{
+        \global\colveccount#1
+        \begin{pmatrix}
+        \colvecnext
+}
+\def\colvecnext#1{
+        #1
+        \global\advance\colveccount-1
+        \ifnum\colveccount>0
+                \\
+                \expandafter\colvecnext
+        \else
+                \end{pmatrix}
+        \fi
+} 
+
+\def\i{\hat{i}} 		%vec i hat
+\def\j{\hat{j}} 		%vec j hat
+\def\k{\hat{k}}			%vec k hat
+
+\def\ijk{$\i$, $\j$ and $\k$\relax} % text ``i, j and k''
+	%macros to decompose vector automatically in different ways
+\def\vcomp#1{{#1}_{x}\i+{#1}_{y}\j+{#1}_{z}\k} 			%in terms of ijk
+\def\vsq#1{\left[{#1}_{x},{#1}_{y},{#1}_{z}\right]} 			%square brackets
+\def\v#1{\colvec{3}{{#1}_{x}}{{#1}_{y}}{{#1}_{z}}} 			%column vector brackets
+\def\vtwo#1{\colvec{2}{{#1}_{x}}{{#1}_{y}}} 				%column vector brackets
+\def\pcomp#1{\left({#1}_{x},{#1}_{y},{#1}_{z}\right)} 		%component of a point 
+
+
+%</Math definitions>%
+
+%<Text Macros>%
+\newcommand{\nullchoice}{None of the other answers}
+
+
+
+
+
+%<Header & Footer>%
+\pagestyle{headandfoot}
+
+
+
+\firstpageheader{\studentid~\textit{\studentclass}~-~\textbf{\studentID}}{}{\studentname~(\textit \studentnickname)}
+\firstpagefooter{Exam version \myversion}{}{\thepage}
+
+
+\runningheader{\studentid~\textit{\studentclass}~-~\textbf{\studentID}}{}{\studentname~(\textit \studentnickname)}
+\runningfooter{Exam version \myversion}{}{\thepage}
+
+\firstpageheadrule
+\runningheadrule
+\firstpagefootrule
+\runningfootrule
+%</Header & Footer>%
+
+
+%<Math Style>%
+%\everymath{\displaystyle}
+%\DeclareMathSizes{11}{11}{11}{11}  %Math sizing
+%</Math Style>%
+
+
+\begin{document}
+%\setcounter{page}{2}
+%\small
+
+%Name: \rule{4in}{.4pt}  \quad  \noindent ID:\enspace\hrulefill
+
+%\rule[1ex]{\textwidth}{2pt}
+
+%
+%\begin{framed}
+%
+%Instructions for this test:
+%
+%%\begin{itemize}
+%%%
+%%%	\item Make sure you finish before the end of the exam time
+%%%
+%%%	\item There is only one correct answer in all multiple choice questions
+%%%	
+%%	\item Once the exam starts, you should go to the last page of the exam. At the end of the exam you will see some pages that are just figures, please detach those pages from the exam to be able to read the exam side by side with those figures when needed. 
+%%	
+%%\end{itemize}
+%
+%
+%{\large \emph{Good Luck!}}
+%\end{framed}
+
+%\vspace{1cm}
+
+%\pagebreak
+
+
+
+%%%%%--------------------------------%%%%%%%%%%%
+%%%%% START OF EXAM HERE%%%%%%%%%%
+%%%%%--------------------------------%%%%%%%%%%%
+
+\begin{coverpages}
+\newcounter{qnum} %counter
+\setcounter{qnum}{0}
+
+
+\begin{center}
+\rule{\textwidth}{5pt}
+\vspace{\stretch{2}}
+
+\textbf{
+\Large\textit{Quiz,  Vectors~---~\studentclass}
+}
+%\begin{tikzpicture}[remember picture,overlay]
+%	\node [xshift=-7cm,yshift=10cm] at (current page.center) {\includegraphics[width = 4cm]{BFITS}};
+%	\node [xshift=7cm,yshift=10cm] at (current page.center) {\includegraphics[width = 4cm]{SKR.jpg}};
+%%  \draw (picturehook) +(-6,-2) node {\includegraphics[width = 4cm]{BFITS}};
+%%  \draw (picturehook) +( 6,-2) node {\includegraphics[width = 4cm]{SKR.jpg}};
+%%\draw [overlay,->,very thick,red,opacity=.5] (c) to[bend left] (n1) (n1) -| (n2);
+%\end{tikzpicture}
+
+\vspace{\stretch{.2}}
+ 
+{\large  Exam Version: \textbf{\myversion}}
+\vspace{\stretch{1}}
+ 
+ \studentname~(\textit{\studentnickname})
+ \vspace{\stretch{.2}}
+
+\studentid~\textit{\studentclass}~-~\textbf{\studentID}
+ 
+\vspace{\stretch{1}}
+ 
+\begin{framed}
+\begin{itemize}
+	\item You can and should have a calculator with you on the exam.
+	\item Any attempt to communicate in Thai with your classmates will be considered cheating, please address your questions in English.
+\end{itemize}
+	
+{\center
+		\tikz[x=1cm] \foreach[count =\count] \i in {D :,-20,-60}{\node at (3 * \count,0) [circle,draw,minimum size = 1.1cm]{\i};};	
+				
+		 \Large \curlyfont Good luck!!
+ }
+\end{framed}
+
+\vspace{\stretch{1}}
+%{\small Online submission at dftba.us/exam}
+\fullanswersheet[10]{\numquestions}
+\vspace{\stretch{2}}
+\rule{\textwidth}{5pt}
+\end{center}
+
+%\newpage\null\thispagestyle{empty}\newpage
+
+\end{coverpages}
+
+
+%\section{Multiple Choice.}
+%\vspace{-.35cm}
+%\textbf{\textit{Choose the correct answer from the given choices}}
+%
+
+\vspace{.35cm}
+
+
+\begin{questions}
+
+	\question
+
+%\question 
+%\begin{choices}
+%	\choice •
+%	\choice •
+%	\choice •
+%	\choice\CorrectChoice •
+%\end{choices} •
+%
+\end{questions}
+
+
+\nomorequestions
+
+\vspace{\stretch{1}}
+\center
+\rule{10cm}{.8pt}
+\endcenter
+\vspace{\stretch{6}}
+
+\end{document}
+
+
+
+
+
+
