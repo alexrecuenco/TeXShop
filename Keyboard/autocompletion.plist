@@ -82,6 +82,8 @@
 	<string>--</string>
 	<key>—</key>
 	<string>---</string>
+	<key>“</key>
+	<string>\inlinecode{#SEL##INS#}</string>
 	<key>†</key>
 	<string>\dag</string>
 	<key>‡</key>
