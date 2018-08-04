@@ -5,7 +5,7 @@
 	<key>"</key>
 	<string>``#SEL##INS#''</string>
 	<key>$</key>
-	<string>\(#SEL##INS#\)</string>
+	<string>$#SEL##INS#$</string>
 	<key>(</key>
 	<string>(#SEL##INS#)</string>
 	<key>[</key>
@@ -19,7 +19,7 @@
 	<key>¡</key>
 	<string>!`</string>
 	<key>¢</key>
-	<string>\[#SEL##INS#\]</string>
+	<string>\(#SEL##INS#\)</string>
 	<key>£</key>
 	<string>\pounds</string>
 	<key>¥</key>
@@ -90,6 +90,8 @@
 	<string>\ddag</string>
 	<key>•</key>
 	<string>\bullet</string>
+	<key>›</key>
+	<string>\[#SEL##INS#\]</string>
 	<key>∂</key>
 	<string>\partial</string>
 	<key>∆</key>
